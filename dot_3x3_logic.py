@@ -46,7 +46,7 @@ This game engine manages 12 lines. Each line distinguished by its name
         |                       |                       |
         |                       |                       |
         |                       |                       |
-'Northwest_West'            'North_Center'      'Northeast_East'
+'West_Northwest'            'North_Center'      'East_Northeast'
         |                       |                       |
         |                       |                       |
         |                       |                       |
@@ -79,4 +79,40 @@ name (a string) as shown here:
 The string 'X' represents player X, and the string 'Y' represents playey Y. 
 
 """
+# NOTE:
+# ----------------------------------------------------------------------------
+# Global vars (private) - maintain the state of the game. prefix vars with
+#       underscores to dicourage access outside this module.
+# ----------------------------------------------------------------------------
+# Boolean vars that keep track of whether or not a line exists between two 
+#       dots. E.g. If _n_nw is True, the line identifeid as 'North_Northwest'
+#       exists.
+# ----------------------------------------------------------------------------
+#       @----_n_nw---@---_n_ne---@
+#       |            |           |        
+#     _w_nw         _n_c       _e_ne
+#       |            |           |
+#       @----_w_c----@----_e_c---@
+#       |            |           |
+#     _w_sw         _s_c       _s_se
+#       |            |           |
+#       @---_s_sw----@---_s_se___@
+
+
+# Init Line status - Initally, no lines exist anywhere (False)
+_n_nw, _n_ne = False, False
+_w_nw, _n_c, _e_ne = False, False, False
+_w_c, _e_c = False, False
+_w_sw, _s_c, _s_se = False, False, False
+_s_sw, _s_se = False, False
+
+# Current player - A string, 'X' for player X or 'Y' for player Y
+_current_player = 'X'
+
+# Initsquare ownership as None
+# A string reps ownership, 'X' for player X or 'Y' for player Y
+
+_top_left_owner, _top_right_owner = None, None
+_bottom_left_owner, _bottom_right_owner = None, None
+
 
