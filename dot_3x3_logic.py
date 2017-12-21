@@ -120,7 +120,7 @@ _bottom_left_owner, _bottom_right_owner = None, None
 #-----------------------------------------------------------------------------
 
 def _update_square(sq):	
-    """(str) -> turtle, bool
+    """(str) -> bool
     Updates the owner of square <sq>, if possible.
     <sq> must one of the strings; 'top_left', 'top_right', 'bottom_left',
     or 'bottom_right'. 
@@ -132,8 +132,33 @@ def _update_square(sq):
     and returns True. 
     If one of the players already owns the square, or if not all lines exist 
     to complete the square, returns False. 		
-    """        
-    return
+    """
+
+    global _top_left_owner, _top_right_owner, _bottom_left_owner, \
+            _bottom_right_owner
+    
+    if sq == 'top_left' and _top_left_owner == None and _n_nw and _n_c and \
+            _w_c and _w_nw: 
+        _top_left_owner = _current_player 
+        return True
+    
+    elif sq == 'top_right' and _top_right_owner == None and _n_ne and _e_ne \
+            and _e_c and _n_c:
+        _top_right_owner = _current_player
+        return True
+
+    elif sq == 'bottom_left' and _bottom_left_owner == None and _w_c and _s_c \
+            and _s_sw and _w_sw:
+        _bottom_left_owner = _current_player
+        return True
+
+    elif sq == 'bottom_right' and _bottom_right_owner == None and _e_c and \
+            _s_se and _s_se and _s_c:
+        _bottom_right_owner = _current_player
+        return True
+
+    else:
+        return False # Ownership unchanged
 
 def _update_squares():
     """() -> turtle, bool
