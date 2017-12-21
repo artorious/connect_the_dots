@@ -133,7 +133,7 @@ def _update_square(sq):
     If one of the players already owns the square, or if not all lines exist 
     to complete the square, returns False. 		
     """
-
+    # Declare global vars affected by function
     global _top_left_owner, _top_right_owner, _bottom_left_owner, \
             _bottom_right_owner
     
@@ -167,7 +167,12 @@ def _update_squares():
     
     Returns True if one or more squares receives a new owner, otherwise False
     """
-    return
+    top_left = _update_square('top_left')
+    top_right = _update_square('top_right')
+    bottom_left = _update_square('bottom_left')
+    bottom_right = _update_square('bottom_right')
+    
+    return top_left or top_right or bottom_left or bottom_right
 
 ##############################################################################
 
