@@ -98,7 +98,7 @@ The string 'X' represents player X, and the string 'Y' represents playey Y.
 #       @---_s_sw----@---_s_se___@
 
 
-# Init Line status - Initally, no lines exist anywhere (False)
+# Init Line status (exists) - Initally, no lines exist anywhere (False)
 _n_nw, _n_ne, _n_c = False, False, False
 _w_nw, _w_sw, _w_c = False, False, False
 _e_ne, _e_se, _e_c = False, False, False
@@ -108,7 +108,7 @@ _s_sw, _s_se, _s_c = False, False, False
 _current_player = 'X'
 
 # Init square ownership as None
-#TODO: A string reps ownership, 'X' for player X or 'Y' for player Y
+# A string reps ownership, 'X' for player X or 'Y' for player Y
 
 _top_left_owner, _top_right_owner = None, None
 _bottom_left_owner, _bottom_right_owner = None, None
