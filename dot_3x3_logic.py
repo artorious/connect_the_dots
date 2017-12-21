@@ -333,7 +333,47 @@ def winner():
     each own two squares.
     Reurns None if open squares still exist, and so the game can continue
     """
-    return
+    # Init counter var for the players' squares
+    x_count, y_count = 0, 0
+
+    if _top_left_owner == 'X':
+        x_count += 1
+    
+    elif _top_left_owner == 'Y':
+        y_count += 1
+    
+    elif _top_right_owner == 'X':
+        x_count += 1
+
+    elif _top_right_owner == 'Y':
+        y_count += 1
+
+    elif _bottom_left_owner == 'X':
+        x_count += 1
+    
+    elif _bottom_left_owner == 'Y':
+        y_count += 1
+    
+    elif _bottom_right_owner == 'X':
+        y_count += 1
+    
+    elif _bottom_right_owner == 'Y':
+        y_count += 1
+
+    if x_count + y_count == 4: # All squares filled
+        if x_count > y_count:
+            return 'X'  # Player X won
+        
+        elif x_count < y_count:
+            return 'Y'  # Player Y won
+
+        else:
+            return 'Draw' # Tied game
+
+    else:
+        return None     # No Winner or draw; game continues
+
+    
 
 def initialize_board():
     """
