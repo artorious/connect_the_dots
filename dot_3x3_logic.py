@@ -93,17 +93,16 @@ The string 'X' represents player X, and the string 'Y' represents playey Y.
 #       |            |           |
 #       @----_w_c----@----_e_c---@
 #       |            |           |
-#     _w_sw         _s_c       _s_se
+#     _w_sw         _s_c       _e_se
 #       |            |           |
 #       @---_s_sw----@---_s_se___@
 
 
 # Init Line status - Initally, no lines exist anywhere (False)
-_n_nw, _n_ne = False, False
-_w_nw, _n_c, _e_ne = False, False, False
-_w_c, _e_c = False, False
-_w_sw, _s_c, _s_se = False, False, False
-_s_sw, _s_se = False, False
+_n_nw, _n_ne, _n_c = False, False, False
+_w_nw, _w_sw, _w_c = False, False, False
+_e_ne, _e_se, _e_c = False, False, False
+_s_sw, _s_se, _s_c = False, False, False
 
 # Init Current player - A string, 'X' for player X or 'Y' for player Y
 _current_player = 'X'
@@ -153,7 +152,7 @@ def _update_square(sq):
         return True
 
     elif sq == 'bottom_right' and _bottom_right_owner == None and _e_c and \
-            _s_se and _s_se and _s_c:
+            _e_se and _s_se and _s_c:
         _bottom_right_owner = _current_player
         return True
 
@@ -161,7 +160,7 @@ def _update_square(sq):
         return False # Ownership unchanged
 
 def _update_squares():
-    """() -> turtle, bool
+    """() ->  bool
     Attepts to update the owners of all the squares that a new line might 
     affect. 
     
@@ -191,7 +190,69 @@ def add_line(line):
     If the line is already present, no change to state of game board and
     returns False
     """
-    return
+    # Declare global vars the func may affect maintaining the game-state
+    global _n_nw, _n_c, _n_ne, _s_c, _s_se, _s_sw, _e_c, _e_se, _e_ne, \
+            _w_c, _w_sw, _w_nw, _current_player
+    
+    line_added = False  # Init unsuccessful by defaulr
+    
+    if line == 'North_Northwest' and not _n_nw:
+        _n_nw = True
+        line_added = True
+    
+    elif line == 'North_Center' and not _n_c:
+        _n_c = True
+        line_added = True
+
+    elif line == 'North_Northeast' and not _n_ne:
+        _n_ne = True
+        line_added = True
+
+    elif line == 'South_Center' and not _s_c:
+        _s_c = True
+        line_added = True
+
+    elif line == 'South_Southeast' and not _s_se:
+        _s_se = True
+        line_added = True
+
+    elif line == 'South_Southwest' and not _s_sw:
+        _s_sw = True
+        line_added = True
+
+    elif line == 'East_Center' and not _e_c:
+        _e_c = True
+        line_added = True
+
+    elif line == 'East_Southeast' and not _e_se:
+        _e_se = True
+        line_added = True
+
+    elif line == 'East_Northeast' and not _e_ne:
+        _e_ne = True
+        line_added == True
+
+    elif line == 'West_Northwest' and not _w_nw:
+        _w_nw = True
+        line_added = True
+
+    elif line == 'West_Southwest' and not _w_sw:
+        _w_sw = True
+        line_added = True
+
+    elif line == 'West_Center' and not _w_c:
+        _w_c = True
+        line_added = True
+    
+    # If line added succesfully, check whether it completes square
+    if line_added and not _update_squares():
+        # Turn move to next player upoun a successful move
+        if _current_player == 'X':
+            _current_player = 'Y'
+        else:
+            _current_player = 'X'
+    
+    return line_added
 
 def square_owner(sq):
     """ (str) -> turtle, NoneType
