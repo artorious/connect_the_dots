@@ -403,4 +403,4 @@ def current_player():
     """() -> str
     Returns the player whose turn it is to move
     """
-    return
+    return _current_player
