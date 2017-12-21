@@ -383,7 +383,21 @@ def initialize_board():
         3. sets the current player to X
     Does not return a value to the caller
     """
-    return
+    # Declare global vars the func may affect maintaining the game-state
+    global _n_nw, _n_c, _n_ne, _s_c, _s_se, _s_sw, _e_c, _e_se, _e_ne, _w_c, \
+            _w_sw, _w_nw, _current_player, _top_left_owner, _top_right_owner, \
+            _bottom_left_owner, _bottom_right_owner
+
+    # Init (line exists) to default state (False)
+    _n_nw = _n_c = _n_ne = _s_c = _s_se = _s_sw = _e_c = _e_se = _e_ne = \
+            _w_c = _w_sw = _w_nw = False
+
+    # Init/Clear all the squares to default state
+    _top_left_owner = _top_right_owner = _bottom_left_owner = \
+        _bottom_right_owner = None
+    
+    # Init current player - X always starts
+    _current_player = 'X'
 
 def current_player():
     """() -> str
