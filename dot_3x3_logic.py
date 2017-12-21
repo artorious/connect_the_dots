@@ -260,9 +260,22 @@ def square_owner(sq):
     <sq> must be one of the strings, 'top_left', 'top_right', 'bottom_right'
     or 'bottom_left'
     
-    Returns the player who owns the given square, and None if noone owns it
+    Returns the player who owns the given square, and None if no-one owns it
     """
-    return
+    if sq == 'top_left':
+        return _top_left_owner
+    
+    elif sq == 'top_right':
+        return _top_right_owner
+    
+    elif sq == 'bottom_left':
+        return _bottom_left_owner
+    
+    elif sq == 'bottom_right':
+        return _bottom_right_owner
+
+    else:
+        return None
 
 def check_line(line):
     """(str) -> bool
