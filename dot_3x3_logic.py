@@ -286,7 +286,44 @@ def check_line(line):
     Returns True if the line exists on the game board, otherwise False if it
     doesn't exist yet
     """
-    return
+    if line == 'North_Northwest':
+        return _n_nw 
+    
+    elif line == 'North_Center':
+        return _n_c
+
+    elif line == 'North_Northeast':
+        return _n_ne 
+
+    elif line == 'South_Center':
+        return _s_c 
+
+    elif line == 'South_Southeast':
+        return _s_se
+
+    elif line == 'South_Southwest':
+        return _s_sw
+
+    elif line == 'East_Center':
+        return _e_c
+
+    elif line == 'East_Southeast':
+        return _e_se
+
+    elif line == 'East_Northeast':
+        return _e_ne 
+
+    elif line == 'West_Northwest':
+        return _w_nw 
+
+    elif line == 'West_Southwest':
+        return _w_sw 
+
+    elif line == 'West_Center':
+        return _w_c
+
+    else:
+        return False
 
 def winner():
     """() -> str, NoneType
