@@ -96,12 +96,23 @@ def dot_to_point(dot):
     elif dot == 'Southeast':
         return 500, 100
 
-def draw_dot(name, col='black'):
+def draw_dot(name, dot_color='black'):
     """(tuple) -> turtle
     Draws a graphical dot <name> within the graphical window.
     <col> specifies the dots's color (black by default)
     """
-    pass
+    global dot_radius
+
+    pensize(1)
+    penup()
+    x_pos, y_pos = dot_to_point(name)
+    setposition(x_pos, y_pos - dot_radius)
+    pendown()
+    color(dot_color)
+    beginfill()
+    circle(dot_radius)
+    end_fill()
+    update()
 
 def draw_line(x_pos1, y_pos1, x_pos2, y_pos2):
     """(int, int, int, int) -> turtle
