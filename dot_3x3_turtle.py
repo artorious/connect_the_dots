@@ -118,7 +118,11 @@ def draw_line(x_pos1, y_pos1, x_pos2, y_pos2):
     """(int, int, int, int) -> turtle
     Draws a line segment with endpints (x_pos1, y_pos1) and (x_pos2, y_pos2)
     """
-    pass
+    penup()
+    setposition(x_pos1, y_pos1)
+    pendown()
+    setposition(x_pos2, y_pos2)
+    update()
 
 def draw_X(x_pos, y_pos):
     """(int, int) -> turtle
