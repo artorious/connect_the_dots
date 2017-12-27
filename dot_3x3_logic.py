@@ -109,7 +109,6 @@ _current_player = 'X'
 
 # Init square ownership as None
 # A string reps ownership, 'X' for player X or 'Y' for player Y
-
 _top_left_owner, _top_right_owner = None, None
 _bottom_left_owner, _bottom_right_owner = None, None
 
@@ -181,7 +180,7 @@ def _update_squares():
 #-----------------------------------------------------------------------------
 
 def add_line(line):
-    """(str) -> turtle, bool
+    """(str) -> bool
     Attempts to add a line between two dots. 
     The parameter <line> must be one of 'North_Northeast', 'North_Northwest',
     'East_Center', etc, (A string represnting a line on the game board)
@@ -255,7 +254,7 @@ def add_line(line):
     return line_added
 
 def square_owner(sq):
-    """ (str) -> turtle, NoneType
+    """ (str) -> str or NoneType
     Checks who owns the given square <sq>
     <sq> must be one of the strings, 'top_left', 'top_right', 'bottom_right'
     or 'bottom_left'
