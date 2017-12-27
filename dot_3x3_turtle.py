@@ -128,14 +128,20 @@ def draw_X(x_pos, y_pos):
     """(int, int) -> turtle
     Draws player X's mark at position (x_pos, y_pos)
     """
-
-    pass
+    color('blue')
+    pensize(10)
+    draw_line(x_pos - 40, y_pos - 40, x_pos + 40, y_pos + 40)
+    draw_line(x_pos - 40, y_pos + 40, x_pos + 40, y_pos - 40)
 
 def draw_Y(x_pos, y_pos):
     """(int, int) -> turlte
     Draws player Y's mark at position (x_pos, y_pos)
     """
-    pass
+    color('blue')
+    pensize(10)
+    draw_line(x_pos - 40, y_pos + 40, x_pos, y_pos)
+    draw_line(x_pos + 40, y_pos + 40, x_pos, y_pos)
+    draw_line(x_pos, y_pos, x_pos, y_pos - 40)
 
 def drwaw_squares(sq, owner):
     """(tuple, str) -> turtle 
