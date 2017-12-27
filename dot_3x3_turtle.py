@@ -69,7 +69,32 @@ def dot_to_point(dot):
     Maps a <dot> to it's location on the board. used to render a dot in it's 
     proper place. 
     """
-    return
+    if dot == 'Northwest':
+        return 100, 500
+    
+    elif dot == 'North':
+        return 300, 500
+    
+    elif dot == 'Northeast':
+        return 500, 500
+
+    elif dot == 'West':
+        return 100, 300
+
+    elif dot == 'Center':
+        return 300, 300
+
+    elif dot == 'East':
+        return 500, 300
+
+    elif dot == 'Southwest':
+        return 100, 100
+
+    elif dot == 'South':
+        return 300, 100
+
+    elif dot == 'Southeast':
+        return 500, 100
 
 def draw_dot(name, col='black'):
     """(tuple) -> turtle
