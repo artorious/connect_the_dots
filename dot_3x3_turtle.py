@@ -33,7 +33,36 @@ def hit(x_pos, y_pos):
     Used when a player clicks the mouse over the board to determine which dot
     (if any) was selected.
     """
-    return
+    dot = None  # Default result
+
+    if 90 < x_pos < 110 and 490 < y_pos < 510:
+        dot = 'Northwest'
+        
+    elif 290 < x_pos < 310 and 490 < y_pos < 510:
+        dot = 'North'
+    
+    elif 490 < x_pos < 510 and 490 < y_pos < 510:
+        dot = 'Northeast'
+
+    elif 90 < x_pos < 110 and 290 < y_pos < 310:
+        dot = 'West'
+    
+    elif 290 < x_pos < 310 and 290 < y_pos < 310:
+        dot = 'Center'
+
+    elif 490 < x_pos < 510 and 290 < y_pos < 310:
+        dot = 'East'
+
+    elif 90 < x_pos < 110 and 90 < y_pos < 110:
+        dot = 'Southwest'
+
+    elif 290 < x_pos < 310 and 90 < y_pos < 110 :
+        dot = 'South'
+    
+    elif 490 < x_pos < 510 and 90 < y_pos < 110:
+        dot = 'Southeast'
+
+    return dot
 
 def dot_to_point(dot):
     """ (str) -> tuple
