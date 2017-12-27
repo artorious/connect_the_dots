@@ -372,8 +372,6 @@ def winner():
     else:
         return None     # No Winner or draw; game continues
 
-    
-
 def initialize_board():
     """
     Makes the playing board ready for a new game.

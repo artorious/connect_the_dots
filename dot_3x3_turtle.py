@@ -14,7 +14,17 @@ def square_to_point(sq):
     Compute the (x, y) coordinates of the center of a square.
     Used to properly place the square's owner when it's captured.
     """
-    return
+    if sq == 'top_left':
+        return (200, 400)
+    
+    elif sq == 'top_right':
+        return (400, 400)
+    
+    elif sq == 'bottom_left':
+        return (200, 200)
+    
+    elif sq == 'bottom_right':
+        return (400, 200)
 
 def hit(x_pos, y_pos):
     """(int, int) -> str or None
