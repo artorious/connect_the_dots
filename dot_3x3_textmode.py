@@ -14,23 +14,110 @@ def show_player(player):
     Determines the string to print in the context of a square's 
     owner <player>
     """
-    return
+    if player:
+        return repr(player.strip())
+    else:
+        return ''
 
 def draw_game():
+# TODO: Fix alignment
     """(None) -> str
     Draws the connect the dot game using text graphics
     """
-    # TODO: 0---1---2   ----------------------------------
+    # 0---1---2   ----------------------------------
+    print('   0', end='')
+    if check_line('North_Northwest'):
+        print('---', end='')
+    
+    else:
+        print('   ', end='')
 
-    # TODO: |   |   |   ----------------------------------
+    print('1', end='')
+    if check_line('North_Northeast'):
+        print('---', end='')
+    
+    else:
+        print('   ', end='')
 
-    # TODO: 3---4---5   ----------------------------------
+    print('2')
 
-    # TODO: |   |   |   ----------------------------------
+    # |   |   |   ----------------------------------
+    
+    if check_line('West_Northwest'):
+        print('   |', end='')
+    else:
+        print('    ', end='')
+    
+    print(show_player(square_owner('top_left')), end='')
 
-    # TODO: 6---7---8   ----------------------------------
+    if check_line('North_Center'):
+        print('  |', end='')
+    else:
+        print('   ', end='')
+    
+    print(show_player(square_owner('top_right')), end='')
 
-    pass
+    if check_line('East_Northeast'):
+        print('  |')
+    else:
+        print('   ')
+
+    # 3---4---5   ----------------------------------
+
+    print('   3', end='')
+    if check_line('West_Center'):
+        print('---', end='')
+    
+    else:
+        print('   ', end='')
+
+    print('4', end='')
+    if check_line('East_Center'):
+        print('---', end='')
+    
+    else:
+        print('   ', end='')
+
+    print('5')
+
+    # |   |   |   ----------------------------------
+
+    if check_line('West_Southwest'):
+        print('   |', end='')
+    else:
+        print('   ', end='')
+    
+    print(show_player(square_owner('bottom_left')), end='')
+
+    if check_line('South_Center'):
+        print('  |', end='')
+    else:
+        print('   ', end='')
+    
+    print(show_player(square_owner('bottom_right')), end='')
+
+    if check_line('East_Southeast'):
+        print('  |')
+    else:
+        print('   ')
+
+    # 6---7---8   ----------------------------------
+
+    print('   6', end='')
+    if check_line('South_Southwest'):
+        print('---', end='')
+    
+    else:
+        print('   ', end='')
+
+    print('7', end='')
+    if check_line('South_Southeast'):
+        print('---', end='')
+    
+    else:
+        print('   ', end='')
+
+    print('8')
 
 def make_line(move):
     """(str) -> str
@@ -46,9 +133,46 @@ def make_line(move):
     of 'North_Northwest', 'Center_North' etc. If the dot1, dot2 pair 
     represents an invalid combination e.g (0, 4), returns string 'No line'
     """
-    return
+    if move == '01' or move == '10':
+        return 'North_Northwest'
 
+    elif move == '21' or move == '12':
+        return 'North_Northeast'
 
+    elif move == '03' or move == '30':
+        return 'West_Northwest'
+
+    elif move == '14' or move == '41':
+        return 'North_Center'
+
+    elif move == '25' or move == '52':
+        return 'East_Northeast'
+
+    elif move == '34' or move == '43':
+        return 'West_Center'
+
+    elif move == '45' or move == '54':
+        return 'East_Center'
+
+    elif move == '36' or move == '63':
+        return 'West_Southwest'
+
+    elif move == '47' or move == '74':
+        return 'South_Center'
+
+    elif move == '58' or move == '85':
+        return 'East_Southeast'
+
+    elif move == '67' or move == '76':
+        return 'South_Southwest'
+
+    elif move == '78' or move == '87':
+        return 'South_Southeast'
+
+    else:
+        return 'No line' # Default 
+
+# TODO: Fix declaration of winner
 if __name__ == '__main__':
     # Start a new game
     initialize_board()
