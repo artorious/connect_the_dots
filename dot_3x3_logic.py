@@ -49,11 +49,11 @@ This game engine manages 12 lines. Each line distinguished by its name
         |                       |                       |
         |                       |                       |
         |                       |                       |
-        @---'West_Center'-------@-----'Center_East'-----@
+        @---'West_Center'-------@-----'East_Center'-----@
         |                       |                       |
         |                       |                       |
         |                       |                       |
-'West_Southwest'         'Center_South'         'East_Southeast'
+'West_Southwest'         'South_Center'         'East_Southeast'
         |                       |                       |
         |                       |                       |
         |                       |                       |
@@ -229,7 +229,7 @@ def add_line(line):
 
     elif line == 'East_Northeast' and not _e_ne:
         _e_ne = True
-        line_added == True
+        line_added = True
 
     elif line == 'West_Northwest' and not _w_nw:
         _w_nw = True

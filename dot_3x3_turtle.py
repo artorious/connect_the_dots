@@ -109,7 +109,7 @@ def draw_dot(name, dot_color='black'):
     setposition(x_pos, y_pos - dot_radius)
     pendown()
     color(dot_color)
-    beginfill()
+    begin_fill()
     circle(dot_radius)
     end_fill()
     update()
@@ -149,10 +149,12 @@ def draw_square(sq, owner):
     """
     # Coordinates the square
     x_pos, y_pos = square_to_point(sq)
+    
     if owner == 'X':
         draw_X(x_pos, y_pos)
+    
     elif owner == 'Y':
-        draw_X(x_pos, y_pos)
+        draw_Y(x_pos, y_pos)
     # Else do not draw anything - the square ha no owner
 
 def check_squares():
@@ -172,14 +174,16 @@ def check_squares():
 
     if win == 'X':
         messagebox.showinfo('Game Over', 'X wins')
+    
     elif win == 'Y':
         messagebox.showinfo('Game Over', 'Y wins')
+    
     elif win == 'Draw':
         messagebox.showinfo('Game Over', 'Tied Game')
         
 
 def mouse_click(x_pos, y_pos):
-    """(int, int) -> turtle, messagebox
+    """(int, int) -> turtle or messagebox
     Responds to the user clicking the mouse when the cursor is over the
     window. Determines if the user clicked on a dot. 
     Activates an initial dot if the initial dot is not already active. 
@@ -187,13 +191,53 @@ def mouse_click(x_pos, y_pos):
     If the move is illegal, the function produces a message box alerting 
     the player
     """
-    pass
+    global initial_dot
+
+    print('Initial dot = {0}'.format(initial_dot))
+
+    print('Clicked at x = {0} and y = {1}'.format(x_pos, y_pos))
+    dot = hit(x_pos, y_pos) # Did the player click on a dot?
+    
+    if dot:
+        print(dot)
+
+        if not initial_dot:
+            initial_dot = dot
+            draw_dot(initial_dot, 'red')
+        
+        elif dot != initial_dot:
+            
+            if add_line(line_name(initial_dot, dot)):
+                # Draw the added line
+                color('black')
+                pensize(5)
+                x_pos1, y_pos1 = dot_to_point(initial_dot)
+                x_pos2, y_pos2 = dot_to_point(dot)
+
+                draw_line(x_pos1, y_pos1, x_pos2, y_pos2)
+
+                # Adjust title bar to show current player
+                title('3x3 Connect the dots - Current player: {0}'.format(current_player()))
+                
+                # Check to see if the move captured a square and/or ended the game
+                check_squares()
+            
+            # Clear the initial dot and redraw both connecting dots
+            draw_dot(initial_dot)
+            initial_dot = None # Initial dot no longer in play
+            draw_dot(dot)
+
+    else:
+        if initial_dot:
+            draw_dot(initial_dot)
+            initial_dot = None     
 
 def reset_game():
     """
     Reinitialize the game's state for the start of a new game
     """
-    pass
+    clearscreen()
+    initialize()
 
 def line_name(dot1, dot2):
     """(str, str) -> str, messagebox
@@ -202,28 +246,93 @@ def line_name(dot1, dot2):
     Displays an error message box if the two dots do not participate in a 
     valid line. 
     """
-    return
+    if (dot1 == 'Northwest' and dot2 == 'North') or \
+            (dot1 == 'North' and dot2 == 'Northwest'):
+        return 'North_Northwest'
+
+    elif (dot1 == 'Northeast' and dot2 == 'North') or \
+            (dot1 == 'North' and dot2 == 'Northeast'):
+        return 'North_Northeast'
+
+    elif (dot1 == 'Northwest' and dot2 == 'West') or \
+            (dot1 == 'West' and dot2 == 'Northwest'):
+        return 'West_Northwest'
+
+    elif (dot1 == 'North' and dot2 == 'Center') or \
+            (dot1 == 'Center' and dot2 == 'North'):
+        return 'North_Center'
+
+    elif (dot1 == 'Northeast' and dot2 == 'East') or \
+            (dot1 == 'East' and dot2 == 'Northeast'):
+        return 'East_Northeast'
+
+    elif (dot1 == 'West' and dot2 == 'Center') or \
+            (dot1 == 'Center' and dot2 == 'West'):
+        return 'West_Center'
+
+    elif (dot1 == 'East' and dot2 == 'Center') or \
+            (dot1 == 'Center' and dot2 == 'East'):
+        return 'East_Center'
+
+    elif (dot1 == 'West' and dot2 == 'Southwest') or \
+            (dot1 == 'Southwest' and dot2 == 'West'):
+        return 'West_Southwest'
+
+    elif (dot1 == 'South' and dot2 == 'Center') or \
+            (dot1 == 'Center' and dot2 == 'South'):
+        return 'South_Center'
+   
+    elif (dot1 == 'East' and dot2 == 'Southeast') or \
+            (dot1 == 'Southeast' and dot2 == 'East'):
+        return 'East_Southeast'
+
+    elif (dot1 == 'South' and dot2 == 'Southwest') or \
+            (dot1 == 'Southwest' and dot2 == 'South'):
+        return 'South_Southwest'
+
+    elif (dot1 == 'South' and dot2 == 'Southeast') or \
+            (dot1 == 'Southeast' and dot2 == 'South'):
+        return 'South_Southeast'
+
+    else:
+        print('Not a VALID dot link')
+        messagebox.showerror('Invalid Link', 'Can\'t connect those two dots')
+        return None
 
 def initialize():
     """(None) -> turtle
     Initializes the graphical presentation and game engine
     """
-    # # Global dot objects
+    # Global dot objects
 
-    # # Init game engine
-    # initialize_board()
+    # Init game engine
+    initialize_board()
 
-    # screensize(600, 600) # Specify the dimensions of the window
-    # setworldcoordinates(0, 0, 599, 599) # Move origin (0, 0) to the left bottom of the window
+    screensize(600, 600) # Specify the dimensions of the window
+    setworldcoordinates(0, 0, 599, 599) # Move origin (0, 0) to the left bottom of the window
 
-    # # Apply tricks to speed up the image rendering
-    # tracer(0)
-    # hideturtle()
+    # Apply tricks to speed up the image rendering
+    tracer(0)
+    hideturtle()
 
-    # # Register callback functions with the Turtle graphics framework
-    # onscreenclick(mouse_click)
-    pass
+    # Register callback functions with the Turtle graphics framework
+    onscreenclick(mouse_click) # On mouse-click
+    onkeyrelease(reset_game, 'q') # On pressing <key> Q
 
+    listen()    # Permit window to listen to keypress events
+    
+    # Set initial window title
+    title('3x3 Connect the dots - Current player: {0}'.format(current_player()))
+
+    initial_dot = None # No initial dot has been selected
+
+    # Draw all the dots
+    for dot in ('North', 'Northeast', 'Northwest',\
+                'South', 'Southeast', 'Southwest',\
+                'Center', 'East', 'West'):
+        draw_dot(dot)
+
+    update() # Compel window to show drawing
 
 if __name__ == '__main__':
     initialize()    # Set up the game
