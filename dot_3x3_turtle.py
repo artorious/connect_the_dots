@@ -143,11 +143,17 @@ def draw_Y(x_pos, y_pos):
     draw_line(x_pos + 40, y_pos + 40, x_pos, y_pos)
     draw_line(x_pos, y_pos, x_pos, y_pos - 40)
 
-def drwaw_squares(sq, owner):
+def draw_square(sq, owner):
     """(tuple, str) -> turtle 
     Draws the owner of the square, if the square has an owner
     """
-    pass
+    # Coordinates the square
+    x_pos, y_pos = square_to_point(sq)
+    if owner == 'X':
+        draw_X(x_pos, y_pos)
+    elif owner == 'Y':
+        draw_X(x_pos, y_pos)
+    # Else do not draw anything - the square ha no owner
 
 def check_squares():
     """(None) -> str
@@ -156,7 +162,21 @@ def check_squares():
     If all squares are owned, the function declares a winner or announces 
     a draw. 
     """
-    pass
+    draw_square('top_left', square_owner('top_left'))
+    draw_square('top_right', square_owner('top_right'))
+    draw_square('bottom_left', square_owner('bottom_left'))
+    draw_square('bottom_right', square_owner('bottom_right'))
+
+    # Check the ownership of each potential square
+    win = winner()
+
+    if win == 'X':
+        messagebox.showinfo('Game Over', 'X wins')
+    elif win == 'Y':
+        messagebox.showinfo('Game Over', 'Y wins')
+    elif win == 'Draw':
+        messagebox.showinfo('Game Over', 'Tied Game')
+        
 
 def mouse_click(x_pos, y_pos):
     """(int, int) -> turtle, messagebox
@@ -188,6 +208,21 @@ def initialize():
     """(None) -> turtle
     Initializes the graphical presentation and game engine
     """
+    # # Global dot objects
+
+    # # Init game engine
+    # initialize_board()
+
+    # screensize(600, 600) # Specify the dimensions of the window
+    # setworldcoordinates(0, 0, 599, 599) # Move origin (0, 0) to the left bottom of the window
+
+    # # Apply tricks to speed up the image rendering
+    # tracer(0)
+    # hideturtle()
+
+    # # Register callback functions with the Turtle graphics framework
+    # onscreenclick(mouse_click)
+    pass
 
 
 if __name__ == '__main__':
