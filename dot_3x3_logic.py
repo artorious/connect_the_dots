@@ -325,7 +325,7 @@ def check_line(line):
         return False
 
 def winner():
-    """() -> str, NoneType
+    """() -> str or NoneType
     Declares the game's winner, player X, player Y or a draw
     
     Returns 'X' or 'Y', or 'Draw' if the game board is full and  both players

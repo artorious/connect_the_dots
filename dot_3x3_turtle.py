@@ -1,9 +1,36 @@
 #!/usr/bin/env python3
 """Graphical Presentation for game board using Python's turtle"""
+# Turtle functions
+from turtle import pensize
+from turtle import penup
+from turtle import setposition
+from turtle import pendown
+from turtle import begin_fill
+from turtle import circle
+from turtle import end_fill
+from turtle import update
+from turtle import color
+from turtle import screensize
+from turtle import setworldcoordinates
+from turtle import onscreenclick
+from turtle import onkeyrelease
+from turtle import tracer 
+from turtle import hideturtle
+from turtle import listen
+from turtle import title
+from turtle import mainloop
+from turtle import clearscreen
 
-from turtle import *
+# Alerts and Messages
 from tkinter import messagebox
-from dot_3x3_logic import *     # Game engine functions
+
+# Game engine functions
+from dot_3x3_logic import initialize_board
+from dot_3x3_logic import add_line
+from dot_3x3_logic import square_owner
+from dot_3x3_logic import check_line
+from dot_3x3_logic import winner
+from dot_3x3_logic import current_player
 
 # Init global vars supporting graphical interace
 initial_dot = None  # First dot selected by a player when creating a line
@@ -134,7 +161,7 @@ def draw_X(x_pos, y_pos):
     draw_line(x_pos - 40, y_pos + 40, x_pos + 40, y_pos - 40)
 
 def draw_Y(x_pos, y_pos):
-    """(int, int) -> turlte
+    """(int, int) -> turtle
     Draws player Y's mark at position (x_pos, y_pos)
     """
     color('blue')
